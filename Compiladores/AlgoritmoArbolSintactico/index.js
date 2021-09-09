@@ -1,4 +1,4 @@
-import { getP, eqSet, imprimirResultados } from './utils.js';
+import { getP, eqSet, transformTranD } from './utils.js';
 
 const alfabeto = new Set(['a', 'b']);
 
@@ -26,100 +26,88 @@ const siguientePos = [
 	new Set([5]), // siguientePos(4)
 ];
 
-function ejecutar() {
-	const estadosD = [];
-	const tranD = [[]];
+const estadosD = [];
+const tranD = [[]];
 
-	estadosD.push(primeraPos);
+estadosD.push(primeraPos);
 
-	let t = 0;
-	while (t < estadosD.length) {
-		let i = 0;
-		for (const a of alfabeto) {
-			let pList = getP(index, estadosD, t, a);
-			let u = new Set(pList.map((s) => [...siguientePos[s]]).flat(1));
+let t = 0;
+while (t < estadosD.length) {
+	let i = 0;
+	for (const a of alfabeto) {
+		let pList = getP(index, estadosD, t, a);
+		let u = new Set(pList.map((s) => [...siguientePos[s]]).flat(1));
 
-			let pos = estadosD.findIndex((el) => eqSet(el, u));
-			if (u.size > 0 && pos === -1) {
-				estadosD.push(u);
-				tranD.push([]);
-			}
-
-			if (u.size === 0) {
-				tranD[t][i] = simboloVacio; // Vacio
-			} else if (pos !== -1) {
-				tranD[t][i] = pos; // Ya existe
-			} else {
-				tranD[t][i] = t + 1; // Nuevo
-			}
-			i++;
+		let pos = estadosD.findIndex((el) => eqSet(el, u));
+		if (u.size > 0 && pos === -1) {
+			estadosD.push(u);
+			tranD.push([]);
 		}
-		t++;
-	}
 
-	imprimirResultados(index, tranD, alfabeto, estadosD); // Imprime Alfabeto, Estados y tranD
+		if (u.size === 0) {
+			tranD[t][i] = simboloVacio; // Vacio
+		} else if (pos !== -1) {
+			tranD[t][i] = pos; // Ya existe
+		} else {
+			tranD[t][i] = t + 1; // Nuevo
+		}
+		i++;
+	}
+	t++;
 }
 
-ejecutar();
+// Graficar
+const nodos = transformTranD(index, tranD, alfabeto, estadosD, simboloVacio); // Imprime Alfabeto, Estados y tranD
+
+let nodes = [];
+let edges = [];
+
+for (const nodo of nodos) {
+	const { estado, inicio, finalizacion, transicion } = nodo;
+	console.log('EStado:', estado);
+	const node = {
+		data: {
+			id: estado,
+			label: `${inicio ? '→' : ''}${estado}${finalizacion ? '*' : ''}`,
+		},
+	};
+
+	for (const { simbolo, destino } of transicion) {
+		if (destino !== simboloVacio) {
+			const edge = {
+				data: {
+					id: estado+destino,
+					label: simbolo,
+					source: estado,
+					target: destino,
+				},
+			};
+			edges.push(edge);
+		}
+	}
+	nodes.push(node);
+}
+
+console.log(nodes);
+console.log(edges);
 
 cytoscape({
 	container: document.getElementById('cy'),
 
 	elements: {
-		nodes: [
-			{
-				data: {
-					id: 'a',
-				},
-			},
-			{
-				data: {
-					id: 'b',
-				},
-			},
-			{
-				data: {
-					id: 'c',
-				},
-			},
-		],
-		edges: [
-			{
-				data: {
-					id: 'ab',
-					source: 'a',
-					target: 'b',
-					label: 'lamondamia',
-				},
-			},
-			{
-				data: {
-					id: 'ba',
-					source: 'b',
-					target: 'a',
-				},
-			},
-			{
-				data: {
-					id: 'aa',
-					source: 'a',
-					target: 'a',
-					label: 'xd',
-				},
-			},
-		],
+		nodes,
+		edges,
 	},
 
 	layout: {
 		name: 'dagre',
-		//name: 'grid',
-		rows: 1,
+		columns: 1,
 	},
 	style: [
 		{
 			selector: 'node',
 			css: {
-				label: 'data(id)',
+				label: 'data(label)',
 				'text-valign': 'center',
 				'text-halign': 'center',
 			},
