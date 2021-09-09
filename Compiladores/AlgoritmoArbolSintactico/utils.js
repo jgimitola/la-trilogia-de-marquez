@@ -15,25 +15,32 @@ export function eqSet(as, bs) {
 	return true;
 }
 
-export function imprimirResultados(
+/**
+ * Transforma tranD, pasando de una matriz a un array de objetos con esta estructura:
+ * nodos SCHEMA [{
+    estado: "A",
+    inicio: true,
+    finalizacion: false,
+    transicion: [{simbolo:"a", destino: "B"},{"b", "B"}]
+  }, ...]
+ *
+ * @param {*} index 
+ * @param {*} tranD 
+ * @param {*} alfabeto 
+ * @param {*} estadosD 
+ * @param {*} simboloVacio 
+ * @returns nodos
+ */
+export function transformTranD(
 	index,
 	tranD,
 	alfabeto,
 	estadosD,
 	simboloVacio
 ) {
-	const tablaTranD = [];
-	const simbolosAlfabeto = [...alfabeto];	
+	const nodos = [];
+	const simbolosAlfabeto = [...alfabeto];
 	const posHashtag = index.length - 1;
-
-	/* 
-  tablaTranD SCHEMA  {
-    estado: "A",
-    inicio: true,
-    finalizacion: false,
-    transicion: [{simbolo:"a", destino: "B"},{"b", "B"}]
-  }
-  */
 
 	for (let i = 0; i < tranD.length; i++) {
 		const estadoLetra = String.fromCharCode(i + 65);
@@ -61,14 +68,8 @@ export function imprimirResultados(
 				destino,
 			});
 		}
-		tablaTranD.push(estadoNodo);
+		nodos.push(estadoNodo);
 	}
-	/* console.log(`Alfabeto = { ${simbolosAlfabeto.join(', ')} }`);
-	console.log(`Estados  = { ${estadosLetra.join(', ')} }`);
-	console.table(tablaTranD); */
 
-	console.log(simbolosAlfabeto);
-	console.log(tablaTranD);
-  console.log("##########");
-	return tablaTranD;
+	return nodos;
 }
