@@ -111,7 +111,6 @@ function calcularGraficar() {
     }
     t++;
   }
-  console.table(tranD);
 
   // Graficar
   const nodos = transformTranD(index, tranD, alfabeto, estadosD, simboloVacio); // Imprime Alfabeto, Estados y tranD
@@ -133,7 +132,7 @@ function calcularGraficar() {
       if (destino !== simboloVacio) {
         const edge = {
           data: {
-            id: estado + destino,
+            id: simbolo + estado + destino,
             label: simbolo,
             source: estado,
             target: destino,
@@ -151,6 +150,10 @@ function calcularGraficar() {
     elements: {
       nodes,
       edges,
+    },
+    layout: {
+      name: "dagre",
+      columns: 1,
     },
     style: [
       {
