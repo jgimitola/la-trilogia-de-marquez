@@ -1,11 +1,12 @@
-import { getP, eqSet, transformTranD } from "./utils.js";
+import { getP, eqSet, transformTranD, actualizarPasos } from "./utils.js";
 
 let paso = 0;
 
-const form = document.getElementById("form");
+const pasosContenedor = document.getElementById("positions");
 const inputAlfabeto = document.getElementById("alphabet-field");
 const inputExpresion = document.getElementById("regex-field");
 const submitButton = document.getElementById("continue-button");
+const pasoapaso = document.getElementById("pasoapaso");
 
 let alfabeto,
   r,
@@ -43,7 +44,7 @@ submitButton.addEventListener("click", (e) => {
       input.type = "text";
 
       div.append(label, input);
-      form.appendChild(div);
+      pasosContenedor.appendChild(div);
 
       for (let i = 0; i < index.length - 1; i++) {
         div = document.createElement("div");
@@ -57,7 +58,7 @@ submitButton.addEventListener("click", (e) => {
         input.type = "text";
 
         div.append(label, input);
-        form.appendChild(div);
+        pasosContenedor.appendChild(div);
       }
       break;
     case 1:
@@ -102,10 +103,13 @@ function calcularGraficar() {
 
       if (u.size === 0) {
         tranD[t][i] = simboloVacio; // Vacio
+        actualizarPasos(pasoapaso, t, i, simboloVacio, estadosD, simboloVacio);
       } else if (pos !== -1) {
         tranD[t][i] = pos; // Ya existe
+        actualizarPasos(pasoapaso, t, i, pos, estadosD, simboloVacio);
       } else {
         tranD[t][i] = t + 1; // Nuevo
+        actualizarPasos(pasoapaso, t, i, t + 1, estadosD, simboloVacio);
       }
       i++;
     }

@@ -1,3 +1,14 @@
+export function actualizarPasos(pasoapaso, i, a, u, estadosD, simboloVacio) {
+  const esVacio = u === simboloVacio;
+  let T = String.fromCharCode(i + 65);
+  let aLetra = String.fromCharCode(a + 97);
+  let U = !esVacio ? String.fromCharCode(u + 65) : simboloVacio;
+
+  let conjunto = !esVacio ? `{${[...estadosD[u]].join(", ")}}` : "{}";
+  console.log(estadosD[u]);
+  pasoapaso.value += `T = ${T} ; a = ${aLetra} ; U = ${U} = ${conjunto} \n`;
+}
+
 export function getP(index, estadosD, t, a) {
   let estados = [...estadosD[t]];
   let pList = [];
