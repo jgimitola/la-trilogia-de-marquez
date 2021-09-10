@@ -1,35 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>HIPERMEGAGRAFICADOR DE AUTOMATAS 3013</title>
-  <meta name="description" content="Graficador y paso a paso del algoritmo del árbol sintáctico." />
-  <meta property="og:title" content="HIPERMEGAGRAFICADOR DE AUTOMATAS 3013" /> 
-  <meta property="og:description" content="Graficador y paso a paso del algoritmo del árbol sintáctico." /> 
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.19.1/cytoscape.min.js" integrity="sha512-REr7ZKldLo2Lx6UiQ6autPWZR+j4u1/7ElYsrcwFe3ZmT/TKXCF/vXqNP/d2BQ78k0tapdZFccpFkku9bwrS3w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>  
-  <script src="https://unpkg.com/dagre@0.7.4/dist/dagre.js"/></script>
-  <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
-</head>
-<body>
-  <h1 class="title">Algoritmo de árbol sintáctico</h1>
+    <link rel="stylesheet" href="styles.css" />
 
-  <div class="form-container">
-    <p>Ingrese los campos siguientes:</p>
-    <form action="#">
-      <label for="regex-field">Expresión regular:</label>
-      <input id="regex-field" placeholder="a(a|b)*bb">
+    <title>HIPERMEGAGRAFICADOR DE AUTOMATAS 3013</title>
+    <meta
+      name="description"
+      content="Graficador y paso a paso del algoritmo del árbol sintáctico."
+    />
+    <meta property="og:title" content="HIPERMEGAGRAFICADOR DE AUTOMATAS 3013" />
+    <meta
+      property="og:description"
+      content="Graficador y paso a paso del algoritmo del árbol sintáctico."
+    />
 
-    </form>
-  </div>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.19.1/cytoscape.min.js"
+      integrity="sha512-REr7ZKldLo2Lx6UiQ6autPWZR+j4u1/7ElYsrcwFe3ZmT/TKXCF/vXqNP/d2BQ78k0tapdZFccpFkku9bwrS3w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
+    <h1 class="title">Algoritmo de árbol sintáctico</h1>
 
-  <div id="cy"></div>
+    <div class="form-container">
+      <p>Ingrese los campos siguientes:</p>
+      <form id="form" action="#">
+        <div class="field">
+          <label for="alphabet-field">Alfabeto:</label>
+          <input id="alphabet-field" placeholder="a, b" />
+        </div>
 
-  <script src="index.js" type="module"></script>
-</body>
+        <div class="field">
+          <label for="regex-field">Expresión regular:</label>
+          <input id="regex-field" placeholder="a(a|b)*bb" />
+        </div>
+
+        <input id="continue-button" type="submit" value="Seguir" />
+      </form>
+    </div>
+
+    <div id="cy"></div>
+
+    <script src="index.js" type="module"></script>
+  </body>
 </html>

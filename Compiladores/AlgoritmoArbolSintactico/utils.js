@@ -1,18 +1,18 @@
 export function getP(index, estadosD, t, a) {
-	let estados = [...estadosD[t]];
-	let pList = [];
-	for (let i = 0; i < estados.length; i++) {
-		if (index[estados[i]] === a) {
-			pList.push(estados[i]);
-		}
-	}
-	return pList;
+  let estados = [...estadosD[t]];
+  let pList = [];
+  for (let i = 0; i < estados.length; i++) {
+    if (index[estados[i]] === a) {
+      pList.push(estados[i]);
+    }
+  }
+  return pList;
 }
 
 export function eqSet(as, bs) {
-	if (as.size !== bs.size) return false;
-	for (let a of as) if (!bs.has(a)) return false;
-	return true;
+  if (as.size !== bs.size) return false;
+  for (let a of as) if (!bs.has(a)) return false;
+  return true;
 }
 
 /**
@@ -31,45 +31,38 @@ export function eqSet(as, bs) {
  * @param {*} simboloVacio 
  * @returns nodos
  */
-export function transformTranD(
-	index,
-	tranD,
-	alfabeto,
-	estadosD,
-	simboloVacio
-) {
-	const nodos = [];
-	const simbolosAlfabeto = [...alfabeto];
-	const posHashtag = index.length - 1;
+export function transformTranD(index, tranD, alfabeto, estadosD, simboloVacio) {
+  const nodos = [];
+  const simbolosAlfabeto = [...alfabeto];
+  const posHashtag = index.length - 1;
 
-	for (let i = 0; i < tranD.length; i++) {
-		const estadoLetra = String.fromCharCode(i + 65);
+  for (let i = 0; i < tranD.length; i++) {
+    const estadoLetra = String.fromCharCode(i + 65);
 
-		const estadoNodo = {};
-		estadoNodo['estado'] = estadoLetra;
+    const estadoNodo = {};
+    estadoNodo["estado"] = estadoLetra;
 
-		estadoNodo['inicio'] = false;
-		estadoNodo['finalizacion'] = false;
+    estadoNodo["inicio"] = false;
+    estadoNodo["finalizacion"] = false;
 
-		if (i === 0) estadoNodo['inicio'] = true;
+    if (i === 0) estadoNodo["inicio"] = true;
 
-		if (estadosD[i].has(posHashtag)) estadoNodo['finalizacion'] = true;
+    if (estadosD[i].has(posHashtag)) estadoNodo["finalizacion"] = true;
 
-		estadoNodo['transicion'] = [];
-		for (let j = 0; j < simbolosAlfabeto.length; j++) {
-			const simbolo = simbolosAlfabeto[j];
-			let destino;
+    estadoNodo["transicion"] = [];
+    for (let j = 0; j < simbolosAlfabeto.length; j++) {
+      const simbolo = simbolosAlfabeto[j];
+      let destino;
 
-			if (tranD[i][j] === simboloVacio) destino = simboloVacio;
-			else destino = String.fromCharCode(tranD[i][j] + 65);
+      if (tranD[i][j] === simboloVacio) destino = simboloVacio;
+      else destino = String.fromCharCode(tranD[i][j] + 65);
 
-			estadoNodo['transicion'].push({
-				simbolo,
-				destino,
-			});
-		}
-		nodos.push(estadoNodo);
-	}
-
-	return nodos;
+      estadoNodo["transicion"].push({
+        simbolo,
+        destino,
+      });
+    }
+    nodos.push(estadoNodo);
+  }
+  return nodos;
 }
