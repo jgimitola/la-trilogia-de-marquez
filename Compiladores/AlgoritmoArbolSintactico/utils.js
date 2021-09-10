@@ -5,8 +5,49 @@ export function actualizarPasos(pasoapaso, i, a, u, estadosD, simboloVacio) {
   let U = !esVacio ? String.fromCharCode(u + 65) : simboloVacio;
 
   let conjunto = !esVacio ? `{${[...estadosD[u]].join(", ")}}` : "{}";
-  console.log(estadosD[u]);
   pasoapaso.value += `T = ${T} ; a = ${aLetra} ; U = ${U} = ${conjunto} \n`;
+}
+
+export function mostrarTablaTranD(tabla, nodos, alfabeto) {
+  `
+  <tr>
+    <th></th>
+    <th>a</th>
+    <th>b</th>
+  </tr>
+  <tr>
+    <td>A</td>
+    <td>B</td>
+    <td>B</td>
+  </tr>
+  <tr>
+    <td>B</td>
+    <td>A</td>
+    <td>A</td>
+  </tr>
+  `
+  let tr = document.createElement("tr");
+  tr.appendChild(document.createElement("th")); // Empty header for the first column
+  let th;
+  for (const simbolo of [...alfabeto]) {
+    th = document.createElement("th");
+    th.innerText = simbolo;
+    tr.appendChild(th);
+  }
+  tabla.appendChild(tr);
+  let i = 0, td;
+  for (const nodo of nodos) {
+    tr = document.createElement("tr");
+    td = document.createElement("td");
+    td.innerText = nodo.estado;
+    tr.appendChild(td);
+    for (const tran of nodo.transicion) {
+      td = document.createElement("td");
+      td.innerText = tran.destino;
+      tr.appendChild(td);
+    }
+    tabla.appendChild(tr);
+  }
 }
 
 export function getP(index, estadosD, t, a) {

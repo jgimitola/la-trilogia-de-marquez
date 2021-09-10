@@ -1,4 +1,4 @@
-import { getP, eqSet, transformTranD, actualizarPasos } from "./utils.js";
+import { getP, eqSet, transformTranD, actualizarPasos, mostrarTablaTranD } from "./utils.js";
 
 let paso = 0;
 
@@ -7,6 +7,7 @@ const inputAlfabeto = document.getElementById("alphabet-field");
 const inputExpresion = document.getElementById("regex-field");
 const submitButton = document.getElementById("continue-button");
 const pasoapaso = document.getElementById("pasoapaso");
+const tabla = document.getElementById("tablaTranD");
 
 let alfabeto,
   r,
@@ -179,4 +180,6 @@ function calcularGraficar() {
       },
     ],
   });
+
+  mostrarTablaTranD(tabla, nodos, alfabeto);
 }
