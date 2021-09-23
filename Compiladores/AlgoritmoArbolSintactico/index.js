@@ -129,7 +129,7 @@ function calcularGraficar() {
     const node = {
       data: {
         id: estado,
-        label: `${inicio ? "→" : ""}${estado}${finalizacion ? "*" : ""}`,
+        label: `${inicio ? "→" : ""}${finalizacion ? "*" : ""}${estado}`,
       },
     };
 

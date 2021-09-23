@@ -39,7 +39,8 @@ export function mostrarTablaTranD(tabla, nodos, alfabeto) {
   for (const nodo of nodos) {
     tr = document.createElement("tr");
     td = document.createElement("td");
-    td.innerText = nodo.estado;
+    const {inicio, estado, finalizacion} = nodo;
+    td.innerText = `${inicio ? "→" : ""}${finalizacion ? "*" : ""}${estado}`;
     tr.appendChild(td);
     for (const tran of nodo.transicion) {
       td = document.createElement("td");
