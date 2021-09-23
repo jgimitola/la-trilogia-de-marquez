@@ -6,7 +6,7 @@ Este algoritmo es utilizado para hallar el automata finito determinista óptimo 
 
 Al entrar a la pagina por medio del siguiente [enlace](https://jgimitola.github.io/la-trilogia-de-marquez/Compiladores/AlgoritmoArbolSintactico/), encontrarás las siguiente interfaz.
 
-![Interfaz de página](/docs/imgs/PaginaVista.png)
+![Interfaz de página](./docs/imgs/PaginaVista.png)
 
 La estructura de la interfaz está compuesta de la siguiente forma:
 
@@ -75,4 +75,4 @@ Conociendo la estructura de la interfaz, los pasos para utilizar la página son 
 Al cumplir con estos pasos, tendrá un AFD graficado por el algoritmo de árbol sintáctico, tendrá el proceso paso por paso y la tabla de transiciones para construir el mismo AFD.
 
 ## Ejemplo
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ZcTeD7XGTXc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![Demo](https://img.youtube.com/vi/ZcTeD7XGTXc/0.jpg)](https://www.youtube.com/watch?v=ZcTeD7XGTXc)
